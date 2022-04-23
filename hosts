@@ -1,0 +1,5 @@
+[nginx]
+terraform1-front ansible_host=51.250.85.245 ansible_user=debain ansible_ssh_private_key=~/.ssh/id_rsa
+
+[react-js]
+terraform2-back ansible_host=51.250.74.62 ansible_user=debain ansible_ssh_private_key=~/.ssh/id_rsa
