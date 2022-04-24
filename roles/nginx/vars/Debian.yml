@@ -6,4 +6,6 @@ nginx_mime_file_path: /etc/nginx/mime.types
 nginx_pidfile: /run/nginx.pid
 nginx_vhost_path: /etc/nginx/sites-enabled
 nginx_default_vhost_path: /etc/nginx/sites-enabled/default
+reactjs_host_ip: 192.168.10.10
+reactjs_host_port: 80
 __nginx_user: "www-data"

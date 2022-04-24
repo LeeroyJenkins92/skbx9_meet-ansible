@@ -1,0 +1,55 @@
+---
+
+- name: "Set Release Path"
+  set_fact:
+    release_path: "{{ project_path }}/releases/{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
+
+- name: "Create project path"
+  file:
+    dest: "{{ project_path }}"
+    mode: 0755
+    recurse: yes
+    state: directory
+
+- name: "Create Relese folder"
+  file:
+    dest: "{{ release_path }}"
+    mode: 0755
+    recurse: yes
+    state: directory
+
+- name: "Clone the repository"
+  git:
+    repo: "{{ repository }}"
+    dest: "{{ release_path }}"
+
+- name: "Add IP address of instance to main site" 
+  replace:
+    path: "{{ release_path }}/src/App.js"
+    regexp: 'Test of Revert'
+    replace: '{{ ansible_default_ipv4.address }}'
+    backup: yes
+
+- name: "Install packages defined in package.json"
+  yarn:
+    path: "{{ release_path }}"
+
+
+- name: Stop APP
+  command: "pm2 stop ReactJS"
+  args:
+    chdir: "{{ project_path }}"
+  ignore_errors: True
+
+- name: Delete APP
+  command: "pm2 delete ReactJS"
+  args:
+    chdir: "{{ project_path }}"
+  ignore_errors: True
+
+- name: "Start ReactJS Application"
+  command: "pm2 --name ReactJS start npm -- start"
+  args:
+    chdir: "{{ release_path }}"
+  environment:
+    PORT: 80

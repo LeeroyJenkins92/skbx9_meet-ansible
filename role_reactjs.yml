@@ -1,0 +1,10 @@
+---
+- hosts: react-js
+  become: yes
+
+  vars:
+    project_path: /var/www
+    repository: https://gitlab.com/LeeroyJenkins92/deploy-blue-green.git
+
+  roles:
+    - role: reactapp

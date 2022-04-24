@@ -1,0 +1,9 @@
+---
+
+project_path: /var/www
+repository: https://gitlab.com/LeeroyJenkins92/deploy-blue-green.git
+packages:
+  - yarn
+  - npm
+  - nodejs
+  
