@@ -13,6 +13,8 @@
   become: yes
 
   vars:
+    reactjs_host_ip: 192.168.10.3
+    reactjs_host_port: 80
     nginx_vhosts:
     - listen: "80 default_server"
       server_name: _
@@ -21,7 +23,7 @@
       filename: main.conf
       extra_parameters: |
         location / {
-          proxy_pass http://192.168.10.3:80;
+          proxy_pass proxy_pass http://{{ reactjs_host_ip }}:{{ reactjs_host_port }};
           proxy_set_header X-Forwarded-Host $host;
           proxy_set_header X-Forwarded-Server $host;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
