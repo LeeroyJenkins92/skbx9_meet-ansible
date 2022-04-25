@@ -13,7 +13,7 @@
   become: yes
 
   vars:
-    reactjs_host_ip: 192.168.10.3
+    reactjs_host_ip: "{{ hostvars['reactjs_1']['ansible_default_ipv4']['address'] }}"
     reactjs_host_port: 80
     nginx_vhosts:
     - listen: "80 default_server"
